@@ -46,15 +46,33 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Admin Panel</h1>
+                <h1 class="display-4 fw-bolder">Users Info</h1>
                 <p class="lead fw-normal text-white-50 mb-0">Everything Manage Here</p>
             </div>
         </div>
     </header>
     <!-- Section-->
     <section class="py-5">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;" class="m-3" id="user_update_panel">
+                <label for="user_name" class="m-2">User Name: 
+                    <input type="text" name="user_name" id="user_name">
+                </label>
+                <label for="user_email" class="m-2">User Email: 
+                    <input type="text" name="user_email" id="user_email">
+                </label>
+                <label for="user_password" class="m-2">User Password: 
+                    <input type="text" name="user_password" id="user_password">
+                </label>
+                <label for="user_status" class="m-2">User Status: 
+                    <select name="user_status" id="user_status" style="padding: 5px;">
+                        <option value="approved">approved</option>
+                        <option value="rejected">rejected</option>
+                    </select>
+                </label>
+                <button class="btn bg-success" onclick="update_user()">Update</button>
+        </div>
         <div class="section__box" style="display: flex;flex-direction:column;justify-content:center;text-align: center;">
-            <h1 class="m-3">Top 5 Users</h1>
+            <h1 class="m-3">Users Table</h1>
             <div style="display:flex;justify-content:center;" class="m-3">
                 <table>
                     <thead>
@@ -63,38 +81,11 @@
                             <th>User Name</th>
                             <th>User Email</th>
                             <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody id="user_table_body"></tbody>
-                </table>
-            </div>
-            <h1 class="m-3">Top 5 Product</h1>
-            <div style="display:flex;justify-content:center;" class="m-3">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Id</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Company</th>
-                            <th>Type</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="product_table_body"></tbody>
-                </table>
-            </div>
-            <h1 class="m-3">Top 5 Order</h1>
-            <div style="display:flex;justify-content:center;" class="m-3">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Id</th>
-                            <th>Order Quantity</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order_table_body"></tbody>
+                    <tbody id="alter_user_table_body"></tbody>
                 </table>
             </div>
         </div>

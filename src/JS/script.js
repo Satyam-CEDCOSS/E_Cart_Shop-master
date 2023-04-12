@@ -46,6 +46,10 @@ $(document).ready(function(){
                     window.location.href = "http://localhost:8080/login_index.php";
                     // console.log(result)
                 }
+                else if(result=="admin"){
+                    window.location.href = "http://localhost:8080/admin_page.php";
+                    // console.log(result)
+                }
                 else{
                     $("#error_log").html("Invalid Id or Password");
                     console.log("Data Do not Matched");
@@ -185,3 +189,177 @@ function sign_out() {
             window.location.href = "http://localhost:8080/index.php";
         })
 }
+
+// User Table Body
+function top_table(){
+    $.ajax({
+        type: "POST",
+        url: "/admin_display.php",
+        data: {"operation":"top_user"},
+        dataType: "text",
+    }).done(function (result){
+        // console.log(result);
+        $("#user_table_body").html(result);
+    })
+    $.ajax({
+        type: "POST",
+        url: "/admin_display.php",
+        data: {"operation":"top_product"},
+        dataType: "text",
+    }).done(function (result){
+        // console.log(result);
+        $("#product_table_body").html(result);
+    })
+    $.ajax({
+        type: "POST",
+        url: "/admin_display.php",
+        data: {"operation":"top_order"},
+        dataType: "text",
+    }).done(function (result){
+        // console.log(result);
+        $("#order_table_body").html(result);
+    })
+}
+top_table()
+
+// USER INFO Table
+$("#user_update_panel").hide()
+let user_var = 0
+function edit_user(val){
+    user_var = val
+    $.ajax({
+        type: "POST",
+        url: "/user_display.php",
+        data: {"operation":"edit","id":val},
+        dataType: "text",
+    }).done(function (result){
+        result = JSON.parse(result)
+        $("#user_name").val(result["Names"])
+        $("#user_email").val(result["Email"])
+        $("#user_password").val(result["Passwords"])
+        $("#user_status").val(result["Status"])
+        $("#user_update_panel").show()
+    })
+}
+function update_user(){
+    let id = user_var
+    let name = $("#user_name").val()
+    let email = $("#user_email").val()
+    let status = $("#user_status").val()
+    $.ajax({
+        type: "POST",
+        url: "/user_display.php",
+        data: {"operation":"update","id":id,"name":name,"email":email,"status":status},
+        dataType: "text",
+    }).done(function (result){
+        console.log(result)
+        $("#user_update_panel").hide()
+        users()
+    })
+}
+function delete_user(val){
+    $.ajax({
+        type: "POST",
+        url: "/user_display.php",
+        data: {"operation":"delete","id":val},
+        dataType: "text",
+    }).done(function (result){
+        console.log(result);
+        users()
+    })
+}
+function users(){
+    $.ajax({
+        type: "POST",
+        url: "/user_display.php",
+        data: {"operation":"display"},
+        dataType: "text",
+    }).done(function (result){
+        $("#alter_user_table_body").html(result);
+    })
+}
+users()
+
+// PRODUCT INFO Table 
+$("#update_product").hide()
+function add_product(){
+    let name = $("#product_name").val()
+    let company = $("#product_company").val()
+    let type= $("#product_type").val()
+    let quantity = $("#product_quantity").val()
+    let price = $("#product_price").val()
+    let market_price = $("#product_market_price").val()
+    let image = $("#product_image").val()
+    $.ajax({
+        type: "POST",
+        url: "/product_display.php",
+        data: {"operation":"add","name":name,"company":company,"type":type,"quantity":quantity,"price":price,"market_price":market_price,"image":image},
+        dataType: "text",
+    }).done(function (result){
+        console.log(result);
+        products()
+    })
+}
+let product_var = 0;
+function edit_product(val){
+    product_var = val;
+    $.ajax({
+        type: "POST",
+        url: "/product_display.php",
+        data: {"operation":"edit","id":val},
+        dataType: "text",
+    }).done(function (result){
+        result = JSON.parse(result)
+        $("#product_name").val(result["product_name"])
+        $("#product_company").val(result["company"])
+        $("#product_type").val(result["type"])
+        $("#product_quantity").val(result["quantity"])
+        $("#product_price").val(result["price"])
+        $("#product_market_price").val(result["original_price"])
+        $("#product_image").val(result["image"])
+        $("#update_product").show()
+    })
+}
+function update_product(){
+    let id = product_var
+    let name = $("#product_name").val()
+    let company = $("#product_company").val()
+    let type= $("#product_type").val()
+    let quantity = $("#product_quantity").val()
+    let price = $("#product_price").val()
+    let market_price = $("#product_market_price").val()
+    let image = $("#product_image").val()
+    $.ajax({
+        type: "POST",
+        url: "/product_display.php",
+        data: {"operation":"update","id":id,"name":name,"company":company,"type":type,"quantity":quantity,"price":price,"market_price":market_price,"image":image},
+        dataType: "text",
+    }).done(function (result){
+        console.log(result);
+        $("#update_product").hide()
+        products()
+    })
+}
+function delete_product(val){
+    $.ajax({
+        type: "POST",
+        url: "/product_display.php",
+        data: {"operation":"delete","id":val},
+        dataType: "text",
+    }).done(function (result){
+        console.log(result);
+        products()
+    })
+}
+function products(){
+    $.ajax({
+        type: "POST",
+        url: "/product_display.php",
+        data: {"operation":"display"},
+        dataType: "text",
+    }).done(function (result){
+        // console.log(result);
+        $("#alter_product_table_body").html(result);
+    })
+}
+products()

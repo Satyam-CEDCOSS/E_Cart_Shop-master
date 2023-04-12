@@ -73,12 +73,6 @@ $_SESSION["login"]=false;
           brands in our store
         </h1>
         <p>Trendy Products, Factory Prices, Excellent Service</p>
-        <button type="button" class="btn btn-outline-light">
-          Learn more
-        </button>
-        <button type="button" class="btn btn-light shadow-0 text-primary pt-2 border border-white">
-          <span class="pt-1">Purchase now</span>
-        </button>
       </div>
     </div>
     <!-- Jumbotron -->

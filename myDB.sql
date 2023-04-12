@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Apr 10, 2023 at 02:11 PM
+-- Generation Time: Apr 12, 2023 at 02:11 PM
 -- Server version: 8.0.19
 -- PHP Version: 7.4.1
 
@@ -44,7 +44,8 @@ CREATE TABLE `datas` (
 INSERT INTO `datas` (`ID`, `Names`, `Email`, `Passwords`, `Status`, `Type`) VALUES
 (1, 'Satyam', 'mail@mail.com', '123', 'approved', 'customer'),
 (2, 'Satyam', '123@123.com', '123', 'approved', 'customer'),
-(3, 'admin', 'admin@admin.com', '123', 'approved', 'admin');
+(3, 'admin', 'admin@admin.com', '123', 'approved', 'admin'),
+(6, 'Ayush', 'a@gmail.com', '1', 'approved', 'customer');
 
 -- --------------------------------------------------------
 
@@ -58,6 +59,27 @@ CREATE TABLE `orders` (
   `order_quantity` int NOT NULL,
   `order_status` enum('Placed','In-process','Delivered','Denial') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`ID`, `product_id`, `order_quantity`, `order_status`) VALUES
+(1, 1, 1, 'Placed'),
+(1, 2, 1, 'Placed'),
+(1, 3, 1, 'Placed'),
+(1, 4, 1, 'Placed'),
+(2, 5, 2, 'Placed'),
+(2, 6, 2, 'Placed'),
+(2, 7, 1, 'Placed'),
+(2, 1, 1, 'Placed'),
+(2, 2, 2, 'Placed'),
+(2, 3, 2, 'Placed'),
+(6, 4, 8, 'Placed'),
+(6, 8, 1, 'Placed'),
+(6, 6, 1, 'Placed'),
+(6, 5, 3, 'Placed'),
+(6, 3, 1, 'Placed');
 
 -- --------------------------------------------------------
 
@@ -102,6 +124,20 @@ CREATE TABLE `user_cart` (
   `cart_quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `user_cart`
+--
+
+INSERT INTO `user_cart` (`ID`, `product_id`, `cart_quantity`) VALUES
+(6, 1, 2),
+(6, 3, 1),
+(6, 2, 1),
+(6, 1, 2),
+(6, 3, 1),
+(6, 2, 2),
+(6, 3, 3),
+(6, 1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +150,20 @@ CREATE TABLE `wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`ID`, `product_id`) VALUES
+(6, 4),
+(6, 1),
+(6, 4),
+(6, 1),
+(6, 4),
+(6, 1),
+(6, 4),
+(6, 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -124,10 +174,31 @@ ALTER TABLE `datas`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD KEY `ID` (`ID`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `user_cart`
+--
+ALTER TABLE `user_cart`
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `ID` (`ID`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `ID` (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -137,13 +208,43 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `datas`
 --
 ALTER TABLE `datas`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `datas` (`ID`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`ID`) REFERENCES `datas` (`ID`),
+  ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`ID`) REFERENCES `datas` (`ID`),
+  ADD CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+
+--
+-- Constraints for table `user_cart`
+--
+ALTER TABLE `user_cart`
+  ADD CONSTRAINT `user_cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `user_cart_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `datas` (`ID`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `datas` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

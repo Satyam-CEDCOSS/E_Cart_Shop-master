@@ -46,7 +46,7 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Admin Panel</h1>
+                <h1 class="display-4 fw-bolder">Product Info</h1>
                 <p class="lead fw-normal text-white-50 mb-0">Everything Manage Here</p>
             </div>
         </div>
@@ -54,50 +54,56 @@
     <!-- Section-->
     <section class="py-5">
         <div class="section__box" style="display: flex;flex-direction:column;justify-content:center;text-align: center;">
-            <h1 class="m-3">Top 5 Users</h1>
-            <div style="display:flex;justify-content:center;" class="m-3">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User Id</th>
-                            <th>User Name</th>
-                            <th>User Email</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="user_table_body"></tbody>
-                </table>
+            <h1 class="m-3">Product Insertion</h1>
+            <div style="display:flex;justify-content:center;flex-direction:column;" class="m-3">
+                <label for="product_name" class="m-2">Product Name: 
+                    <input type="text" name="product_name" id="product_name">
+                </label>
+                <label for="product_company" class="m-2">Company: 
+                    <input type="text" name="product_company" id="product_company">
+                </label>
+                <label for="product_type" class="m-2">Type: 
+                    <input type="text" name="product_type" id="product_type">
+                </label>
+                <label for="product_quantity" class="m-2">Quantity: 
+                    <input type="text" name="product_quantity" id="product_quantity">
+                </label>
+                <label for="product_price" class="m-2">Price: 
+                    <input type="text" name="product_price" id="product_price">
+                </label>
+                <label for="product_market_price" class="m-2">Market Price: 
+                    <input type="text" name="product_market_price" id="product_market_price">
+                </label>
+                <label for="product_image" class="m-2">Image URL: 
+                    <input type="text" name="product_image" id="product_image">
+                </label>
             </div>
-            <h1 class="m-3">Top 5 Product</h1>
+            <div>
+                <button style="width: 200px;margin:auto;" class="btn bg-primary " onclick="add_product()">Submit</button>
+                <button style="width: 200px;margin:auto;" class="btn bg-success " id="update_product" onclick="update_product()">Update</button>
+            </div>
+        </div>
+        <div class="section__box" style="display: flex;flex-direction:column;justify-content:center;text-align: center;">
+            <h1 class="m-3">Product Table</h1>
             <div style="display:flex;justify-content:center;" class="m-3">
                 <table>
                     <thead>
                         <tr>
                             <th>Product Id</th>
                             <th>Product Name</th>
-                            <th>Quantity</th>
                             <th>Company</th>
                             <th>Type</th>
+                            <th>Quantity</th>
                             <th>Price</th>
+                            <th>Market Price</th>
+                            <th>Image URL</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
-                    <tbody id="product_table_body"></tbody>
+                    <tbody id="alter_product_table_body"></tbody>
                 </table>
             </div>
-            <h1 class="m-3">Top 5 Order</h1>
-            <div style="display:flex;justify-content:center;" class="m-3">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Id</th>
-                            <th>Order Quantity</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order_table_body"></tbody>
-                </table>
-            </div>
-        </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">

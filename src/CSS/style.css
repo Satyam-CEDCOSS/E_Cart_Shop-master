@@ -1,8 +1,4 @@
-.icon-hover:hover {
-  border-color: #3b71ca !important;
-  background-color: white !important;
-}
-
-.icon-hover:hover i {
-  color: #3b71ca !important;
+table, th, td{
+  border: 2px solid black;
+  padding: 10px;
 }
