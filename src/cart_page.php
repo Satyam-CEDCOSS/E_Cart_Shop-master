@@ -84,7 +84,7 @@ session_start();
 
                     <div class="card">
                         <div class="card-body">
-                            <a href="/index.php" type="button" class="btn btn-primary btn-block btn-lg">More Shopping</a>
+                            <button type="button" class="btn btn-primary btn-block btn-lg" onclick="more_btn()">More Shopping</button>
                             <button type="button" class="btn btn-warning btn-block btn-lg" onclick="payment()">Proceed to Pay</button>
                         </div>
                     </div>

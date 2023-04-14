@@ -45,6 +45,8 @@ if ($log==0){
         while($cart = mysqli_fetch_assoc($cart_result)) {
             $_SESSION["cart"][$cart["product_id"]-1] += $cart["cart_quantity"];
         }
+        $sql = "TRUNCATE `user_cart`";
+        $result = mysqli_query($conn,$sql);
     }
     
     $wish_sql = "SELECT `product_id` FROM wishlist WHERE `ID`=$u_id";
@@ -53,10 +55,12 @@ if ($log==0){
         while($wish = mysqli_fetch_assoc($wish_result)) {
             $_SESSION["wishlist"][$wish["product_id"]-1]++;
         }
+        $sql = "TRUNCATE `wishlist`";
+        $result = mysqli_query($conn,$sql);
     }
     
     
-    $order_sql = "SELECT `product_id`, `order_quantity`, `order_status` FROM orders WHERE `ID`=$u_id";
+    $order_sql = "SELECT `product_id`, `order_quantity`, `order_status` FROM orders WHERE `ID`=$u_id AND `order_status`!='Denial' ";
     $order_result = mysqli_query($conn, $order_sql);
     if (mysqli_num_rows($order_result) > 0) {
         while($order = mysqli_fetch_assoc($order_result)) {

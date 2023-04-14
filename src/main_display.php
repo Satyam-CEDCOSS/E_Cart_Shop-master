@@ -10,7 +10,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$sql = "SELECT `image`, `product_name`, `company`, `price` FROM product";
+$sql = "SELECT `image`, `product_name`, `quantity`, `company`, `price` FROM product";
 
 $result = mysqli_query($conn, $sql);
 while ($data = mysqli_fetch_assoc($result)) {

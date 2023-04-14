@@ -174,6 +174,7 @@ function payment() {
         else{
             alert("Your Payment has successfully done")
             window.location.href = "http://localhost:8080/login_index.php";
+            // console.log(result);
         }
     })
 }
@@ -363,3 +364,19 @@ function products(){
     })
 }
 products()
+
+// MORE SHOPPING BUTTON 
+function more_btn(){
+    $.ajax({
+        type: "POST",
+        url: "/more_shop.php",
+        dataType: "text",
+    }).done(function (result){
+        if (result=="SignOut"){
+            window.location.href = "http://localhost:8080/index.php";
+        }
+        else{
+            window.location.href = "http://localhost:8080/login_index.php";
+        }
+    })
+}
