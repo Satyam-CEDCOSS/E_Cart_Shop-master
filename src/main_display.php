@@ -16,7 +16,6 @@ $result = mysqli_query($conn, $sql);
 while ($data = mysqli_fetch_assoc($result)) {
     array_push($_SESSION["display"],$data);
 }
-// print_r($_SESSION["display"]);
 $txt = "";
 foreach ($_SESSION["display"] as $key => $value) {
     $txt .= "<div class='col-lg-3 col-md-6 col-sm-6 d-flex'>

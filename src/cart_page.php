@@ -42,10 +42,10 @@ session_start();
                             <div class='card-body p-4'>
                                 <div class='row d-flex justify-content-between align-items-center'>
                                     <div class='col-md-2 col-lg-2 col-xl-2'>
-                                        <img src=".$_SESSION["display"][$key]["image"]." alt=".$_SESSION["display"][$key]["product_name"]." width='100px' height='100px'>
+                                    <img src=".$_SESSION["display"][$key]["image"]." alt=".$_SESSION["display"][$key]["product_name"]." width='100px' height='100px'>
                                     </div>
                                     <div class='col-md-3 col-lg-3 col-xl-3'>
-                                        <p class='lead fw-normal mb-2'>".$_SESSION["display"][$key]["product_name"]."</p>
+                                    <p class='lead fw-normal mb-2'>".$_SESSION["display"][$key]["product_name"]."</p>
                                         <p>".$_SESSION["display"][$key]["company"]."</p>
                                     </div>
                                     <div class='col-md-3 col-lg-3 col-xl-2 d-flex'>
